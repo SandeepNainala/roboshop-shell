@@ -1,4 +1,4 @@
-echo -e "/e[33m<<<<<<<<<<Configuring NodeJS repos>>>>>>>>>>>>/e[0m"
+echo -e "\e[36m<<<<<<<<<<Configuring NodeJS repos>>>>>>>>>>>>\e[0m"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 yum install nodejs -y
 useradd roboshop
