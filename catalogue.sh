@@ -5,7 +5,7 @@ yum install nodejs -y
 echo -e "\e[36m<<<<<<<<<<< Adding Application User>>>>>>>>>>>>>>>>\e[0m"
 useradd roboshop
 echo -e "\e[36m<<<<<<<<<<<<<<< Creating Application directory >>>>>>>>>>>>>>>>>>>>>>\e[0m"
-rm- rf /app
+rm -rf /app
 mkdir /app
 echo -e "\e[33m<<<<<<<<<< Downloading application content >>>>>>>>>>>>>>>>>\e[0m"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
