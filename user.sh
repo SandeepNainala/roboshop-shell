@@ -21,7 +21,7 @@ systemctl daemon-reload
 systemctl enable user
 systemctl restart user
 echo -e "\e[33m<<<<<<<<<<<<<< start mongodb >>>>>>>>>>>>>>>>>>\e[0m"
-cp mongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
 echo -e "\e[33m<<<<<<<<<<<<<< install mongodb >>>>>>>>>>>>>>>>>>\e[0m"
 yum install mongodb-org-shell -y
 echo -e "\e[33m<<<<<<<<<<<<<< connect mongodb >>>>>>>>>>>>>>>>>>\e[0m"
