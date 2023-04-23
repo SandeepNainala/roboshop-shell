@@ -1,5 +1,5 @@
 source common.sh
-dirname $0
+dirname
 
 exit
 
