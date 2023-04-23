@@ -18,7 +18,7 @@ unzip /tmp/user.zip
 echo -e "\e[36m<<<<<<<<<<< download package >>>>>>>>>>>>>\e[0m"
 npm install
 echo -e "\e[33m<<<<<<<<<<<<<< copying user systemd files  >>>>>>>>>>>>>>>>>>\e[0m"
-cp source ${script_path}/common.sh/user.service /etc/systemd/system/user.service
+cp  ${script_path}/user.service /etc/systemd/system/user.service
 echo -e "\e[33m<<<<<<<<<<<<<< start user services >>>>>>>>>>>>>>>>>>\e[0m"
 systemctl daemon-reload
 systemctl enable user
