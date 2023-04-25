@@ -19,7 +19,7 @@ mvn clean package
 mv target/shipping-1.0.jar shipping.jar
 echo -e "\e[36m<<<<<<<<<<< systemd files copy >>>>>>>>>>>>>\e[0m"
 
-cp $script_path/shipping.service /etc/systemd/system/shipping.service
+cp ${script_path}/shipping.service /etc/systemd/system/shipping.service
 echo -e "\e[36m<<<<<<<<<<< start shipping service  >>>>>>>>>>>>>\e[0m"
 systemctl daemon-reload
 systemctl enable shipping
