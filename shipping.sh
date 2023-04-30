@@ -4,6 +4,10 @@ source ${script_path}/common.sh
 
 mysql_root_password=$1
 
+if [ "$mysql_root_password" ]; then
+  echo Input mySQL password Missing
+  exit
+fi
 component=shipping
 
 func_nodejs

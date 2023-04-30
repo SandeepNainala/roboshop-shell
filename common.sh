@@ -4,6 +4,18 @@ print_head(){
   echo -e "\e[36m<<<<<<<<<<< $* >>>>>>>>>>>>>\e[0m"
 }
 
+schema_setup() {
+  if [ "$schema_setup" == "mongo" ]; then
+    print_head copy MongoDB repo
+    cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
+    eprint_head Installing MongoDB client
+    yum install mongodb-org-shell -y
+    print_head Load schema
+    mongo --host 172.31.19.96 </app/schema/${component}.js
+
+fi
+}
+
 func_nodejs(){
   print_head "Configuring NodeJS repo"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash
@@ -31,5 +43,8 @@ func_nodejs(){
   systemctl daemon-reload
   systemctl enable ${component}
   systemctl restart ${component}
+
+func_nodejs
+schema_setup
 
 }
