@@ -1,21 +1,13 @@
 script=$(realpath "$0")
 script_path=$(dirname "$script")
 source ${script_path}/common.sh
-
 mysql_root_password=$1
 
-if [ "$mysql_root_password" ]; then
-  echo Input mySQL password Missing
+if [ -z "$mysql_root_password" ]; then
+  echo Input MySQL Root Password Missing
   exit
 fi
-component=shipping
 
-func_nodejs
-
-print_head Install mysql
-yum install mysql -y
-
-print_head start mysql schema
-mysql -h mysql-dev.devops71.cloud -uroot -p${mysql_root_password} < /app/schema/shipping.sql
-
-systemctl restart ${component}
+component="shipping"
+schema_setup=mysql
+func_java
