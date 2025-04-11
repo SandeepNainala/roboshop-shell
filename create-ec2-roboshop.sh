@@ -3,6 +3,8 @@
 # This script is used to create an EC2 instance in AWS and install the Roboshop application on it.
 
 instance=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "web")
+domain_name="devops91.cloud"
+hosted_zone_id="Z08884492QFPW45HM4UQO"       # replace with your hosted zone id
 
 for name in ${instance[@]}; do
   if [ $name == "shipping" ] || [ $name == "mysql"]
@@ -24,6 +26,23 @@ for name in ${instance[@]}; do
         ip_to_use=$public_ip
       else
         private_ip=$(aws ec2 describe-instances --instance-ids $instance_id --query 'Reservations[0].Instances[0].[PrivateIpAddress]' --output text)
-        ip_to_use=$private_ip
+        ip_to_use=$private_ip      # use private ip for all other instances
       fi
+
+      echo "creating R53 record for $name"
+          aws route53 change-resource-record-sets --hosted-zone-id $hosted_zone_id --change-batch '
+          {
+              "Comment": "Creating a record set for '$name'"
+              ,"Changes": [{
+              "Action"              : "UPSERT"
+              ,"ResourceRecordSet"  : {
+                  "Name"              : "'$name.$domain_name'"
+                  ,"Type"             : "A"
+                  ,"TTL"              : 1
+                  ,"ResourceRecords"  : [{
+                      "Value"         : "'$ip_to_use'"
+                  }]
+              }
+              }]
+          }'
 done
